@@ -87,10 +87,10 @@ export const CounterWidget = (props) => {
             </div>
             <small>{period}, <FontAwesomeIcon icon={faGlobeEurope} size="xs" /> WorldWide</small>
             <div className="small mt-2">
-              <FontAwesomeIcon icon={percentageIcon} className={`${percentageColor} me-1`} />
+              <FontAwesomeIcon className={`${percentageColor} me-1`} />
               <span className={`${percentageColor} fw-bold`}>
                 {percentage}%
-              </span> Since last month
+              </span>
             </div>
           </Col>
         </Row>
