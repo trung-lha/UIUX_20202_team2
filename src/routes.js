@@ -15,9 +15,11 @@ export const Routes = {
   Lock: { path: "/examples/lock" },
   NotFound: { path: "/examples/404" },
   ServerError: { path: "/examples/500" },
+
   CongViec: { path: "/congnhan" },
   Kpi: { path: "/congnhan/kpi" },
-
+  Employee: {path: "/employee_manage"},
+  
   // docs
   DocsOverview: { path: "/documentation/overview" },
   DocsDownload: { path: "/documentation/download" },
@@ -46,4 +48,6 @@ export const Routes = {
   Tooltips: { path: "/components/tooltips" },
   Toasts: { path: "/components/toasts" },
   WidgetsComponent: { path: "/components/widgets" },
+
+
 };

@@ -162,11 +162,14 @@ export default (props = {}) => {
               </Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
-              <CollapsableNavItem eventKey="Congviec/" title="Công Việc">
+              <CollapsableNavItem
+                eventKey="Congviec/"
+                title="Công Việc"
+                >
                 {works.map((item) => (
                   <NavItem
                     title={item}
-                    link={Routes.CongViec.path + `/${item.replace(" ", "_")}`}
+                    link={Routes.CongViec.path + `/#`}
                   />
                 ))}
               </CollapsableNavItem>

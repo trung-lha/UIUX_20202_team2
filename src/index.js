@@ -25,8 +25,8 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import "react-datetime/css/react-datetime.css";
 
 import ScrollToTop from "./components/ScrollToTop";
-import HomePage from "./pages/employee/index.js";
-// import HomePage from "./pages/HomePage.js";
+// import HomePage from "./pages/employee/index.js";
+import HomePage from "./pages/admin/HomePage.js";
 
 ReactDOM.render(
   <HashRouter>

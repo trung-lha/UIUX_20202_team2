@@ -1,10 +1,8 @@
-import { faRoute } from "@fortawesome/free-solid-svg-icons";
 import React, { useState, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Routes } from "../../routes";
 import Sidebar from "../../components/SidebarUser";
 import { UserInfo } from "../../components/Navbar";
-import Footer from "../../components/Footer";
 import Preloader from "../../components/Preloader";
 import DashboardOverview from "./components/congviec";
 import Kpi from "./components/kpi";
@@ -79,7 +77,7 @@ export default () => {
         component={DashboardOverview}
       />
       <RouteWithSidebar exact path={Routes.Kpi.path} component={Kpi} />
-      {/* <Redirect to={Routes.NotFound.path} /> */}
+      <Redirect to={Routes.NotFound.path} />
     </Switch>
   );
 };
