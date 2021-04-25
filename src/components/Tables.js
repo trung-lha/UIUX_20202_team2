@@ -192,9 +192,9 @@ export const TransactionsTable = () => {
 
   const TableRow = (props) => {
     const { invoiceNumber, subscription, price, issueDate, dueDate, status } = props;
-    const statusVariant = status === "Paid" ? "success"
-      : status === "Due" ? "warning"
-        : status === "Canceled" ? "danger" : "primary";
+    const statusVariant = status === "Đã hoàn thành" ? "success"
+      : status === "Đang thực hiện" ? "warning"
+        : status === "Quá hạn" ? "danger" : "primary";
 
     return (
       <tr>
@@ -220,7 +220,7 @@ export const TransactionsTable = () => {
         </td>
         <td>
           <span className="fw-normal">
-            ${parseFloat(price).toFixed(2)}
+            {parseFloat(price)}%
           </span>
         </td>
         <td>
@@ -237,13 +237,10 @@ export const TransactionsTable = () => {
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item>
-                <FontAwesomeIcon icon={faEye} className="me-2" /> View Details
-              </Dropdown.Item>
-              <Dropdown.Item>
-                <FontAwesomeIcon icon={faEdit} className="me-2" /> Edit
+                <FontAwesomeIcon icon={faEye} className="me-2" /> Chi tiết
               </Dropdown.Item>
               <Dropdown.Item className="text-danger">
-                <FontAwesomeIcon icon={faTrashAlt} className="me-2" /> Remove
+                <FontAwesomeIcon icon={faTrashAlt} className="me-2" /> Xóa
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
@@ -259,12 +256,12 @@ export const TransactionsTable = () => {
           <thead>
             <tr>
               <th className="border-bottom">#</th>
-              <th className="border-bottom">Bill For</th>
-              <th className="border-bottom">Issue Date</th>
-              <th className="border-bottom">Due Date</th>
-              <th className="border-bottom">Total</th>
-              <th className="border-bottom">Status</th>
-              <th className="border-bottom">Action</th>
+              <th className="border-bottom">Tên công việc</th>
+              <th className="border-bottom">Ngày bắt đầu</th>
+              <th className="border-bottom">Ngày kết thúc</th>
+              <th className="border-bottom">Tiến độ</th>
+              <th className="border-bottom">Trạng thái</th>
+              <th className="border-bottom">Hành động</th>
             </tr>
           </thead>
           <tbody>
@@ -275,7 +272,7 @@ export const TransactionsTable = () => {
           <Nav>
             <Pagination className="mb-2 mb-lg-0">
               <Pagination.Prev>
-                Previous
+                Trước
               </Pagination.Prev>
               <Pagination.Item active>1</Pagination.Item>
               <Pagination.Item>2</Pagination.Item>
@@ -283,12 +280,12 @@ export const TransactionsTable = () => {
               <Pagination.Item>4</Pagination.Item>
               <Pagination.Item>5</Pagination.Item>
               <Pagination.Next>
-                Next
+                Tiếp
               </Pagination.Next>
             </Pagination>
           </Nav>
           <small className="fw-bold">
-            Showing <b>{totalTransactions}</b> out of <b>25</b> entries
+            Hiển thị <b>{totalTransactions}</b> trong số <b>25</b> công việc
           </small>
         </Card.Footer>
       </Card.Body>

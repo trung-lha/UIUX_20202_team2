@@ -1,5 +1,7 @@
 
 export const Routes = {
+    // Manager
+    AddTask: {path: "/manager/addtask"},
     // pages
     Presentation: { path: "/" },
     DashboardOverview: { path: "/dashboard/overview" },
