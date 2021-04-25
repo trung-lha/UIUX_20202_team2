@@ -199,9 +199,12 @@ export const TransactionsTable = () => {
     return (
       <tr>
         <td>
-          <Card.Link as={Link} to={Routes.Invoice.path} className="fw-normal">
+          <span className="fw-normal">
             {invoiceNumber}
-          </Card.Link>
+          </span>
+          {/* <Card.Link as={Link} to={Routes.Invoice.path} className="fw-normal">
+            {invoiceNumber}
+          </Card.Link> */}
         </td>
         <td>
           <span className="fw-normal">
@@ -237,7 +240,7 @@ export const TransactionsTable = () => {
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item>
-                <FontAwesomeIcon icon={faEye} className="me-2" /> Chi tiết
+                <FontAwesomeIcon icon={faEye} className="me-2" />git Chi tiết
               </Dropdown.Item>
               <Dropdown.Item className="text-danger">
                 <FontAwesomeIcon icon={faTrashAlt} className="me-2" /> Xóa
