@@ -172,6 +172,7 @@ export default (props = {}) => {
               </CollapsableNavItem>
             </Nav>
             <NavItem title="Chỉ tiêu công việc" link={Routes.Kpi.path} />
+            <NavItem title="Danh sách công việc" link={Routes.Transactions.path}/>
           </div>
         </SimpleBar>
       </CSSTransition>

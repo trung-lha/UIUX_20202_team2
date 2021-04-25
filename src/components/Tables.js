@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleDown,
@@ -27,6 +27,7 @@ import {
   Pagination,
   ButtonGroup,
   Alert,
+  Modal,
 } from "@themesberg/react-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -41,6 +42,8 @@ import {
   SalesValueWidgetPhone,
 } from "./Widgets";
 import { trafficShares } from "../data/charts";
+import AddTask from "../pages/manager/AddTask";
+import { GeneralInfoForm } from "../components/Forms";
 
 const ValueChange = ({ value, suffix }) => {
   const valueIcon = value < 0 ? faAngleDown : faAngleUp;
@@ -255,7 +258,13 @@ export const RankingTable = () => {
 };
 
 export const TransactionsTable = () => {
+  const [showDefault, setShowDefault] = useState(false);
+  const handleClose = () => setShowDefault(false);
   const totalTransactions = transactions.length;
+
+  const showModel = () => {
+    setShowDefault(true);
+  }
 
   const TableRow = (props) => {
     const { invoiceNumber, subscription, price, issueDate, dueDate, status } = props;
@@ -303,8 +312,8 @@ export const TransactionsTable = () => {
               </span>
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item>
-                <FontAwesomeIcon icon={faEye} className="me-2" />git Chi tiết
+              <Dropdown.Item onClick={showModel}>
+                <FontAwesomeIcon icon={faEye} className="me-2" />Chi tiết
               </Dropdown.Item>
               <Dropdown.Item className="text-danger">
                 <FontAwesomeIcon icon={faTrashAlt} className="me-2" /> Xóa
@@ -315,53 +324,84 @@ export const TransactionsTable = () => {
       </tr>
     );
   };
+  const ShowDetail = () => {
+    return (
+      <div id="myModel" className="modalFood">
+        <div className="content-modal-box">
+          <AddTask></AddTask>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <Card border="light" className="table-wrapper table-responsive shadow-sm">
-      <Card.Body className="pt-0">
-        <Table hover className="user-table align-items-center">
-          <thead>
-            <tr>
-              <th className="border-bottom">#</th>
-              <th className="border-bottom">Tên công việc</th>
-              <th className="border-bottom">Ngày bắt đầu</th>
-              <th className="border-bottom">Ngày kết thúc</th>
-              <th className="border-bottom">Tiến độ</th>
-              <th className="border-bottom">Trạng thái</th>
-              <th className="border-bottom">Hành động</th>
-            </tr>
-          </thead>
-          <tbody>
-            {transactions.map((t) => (
-              <TableRow key={`transaction-${t.invoiceNumber}`} {...t} />
-            ))}
-          </tbody>
-        </Table>
-        <Card.Footer className="px-3 border-0 d-lg-flex align-items-center justify-content-between">
-          <Nav>
-            <Pagination className="mb-2 mb-lg-0">
+    <>
+      <div>
+        <Card border="light" className="table-wrapper table-responsive shadow-sm">
+          <Card.Body className="pt-0">
+            <Table hover className="user-table align-items-center">
+              <thead>
+                <tr>
+                  <th className="border-bottom">#</th>
+                  <th className="border-bottom">Tên công việc</th>
+                  <th className="border-bottom">Ngày bắt đầu</th>
+                  <th className="border-bottom">Ngày kết thúc</th>
+                  <th className="border-bottom">Tiến độ</th>
+                  <th className="border-bottom">Trạng thái</th>
+                  <th className="border-bottom">Hành động</th>
+                </tr>
+              </thead>
+              <tbody>
+                {transactions.map((t) => (
+                  <TableRow key={`transaction-${t.invoiceNumber}`} {...t} />
+                ))}
+              </tbody>
+            </Table>
+            <Card.Footer className="px-3 border-0 d-lg-flex align-items-center justify-content-between">
+              <Nav>
+                <Pagination className="mb-2 mb-lg-0">
 
-              <Pagination.Prev>
-                Trước
+                  <Pagination.Prev>
+                    Trước
               </Pagination.Prev>
 
-              <Pagination.Item active>1</Pagination.Item>
-              <Pagination.Item>2</Pagination.Item>
-              <Pagination.Item>3</Pagination.Item>
-              <Pagination.Item>4</Pagination.Item>
-              <Pagination.Item>5</Pagination.Item>
-              <Pagination.Next>
-                Tiếp
+                  <Pagination.Item active>1</Pagination.Item>
+                  <Pagination.Item>2</Pagination.Item>
+                  <Pagination.Item>3</Pagination.Item>
+                  <Pagination.Item>4</Pagination.Item>
+                  <Pagination.Item>5</Pagination.Item>
+                  <Pagination.Next>
+                    Tiếp
               </Pagination.Next>
 
-            </Pagination>
-          </Nav>
-          <small className="fw-bold">
-            Hiển thị <b>{totalTransactions}</b> trong số <b>25</b> công việc
+                </Pagination>
+              </Nav>
+              <small className="fw-bold">
+                Hiển thị <b>{totalTransactions}</b> trong số <b>25</b> công việc
           </small>
-        </Card.Footer>
-      </Card.Body>
-    </Card>
+            </Card.Footer>
+          </Card.Body>
+        </Card>
+
+      </div>
+      <Modal as={Modal.Dialog} centered show={showDefault} onHide={handleClose} size="xl">
+        <Modal.Header>
+          <Modal.Title className="h6">Chi tieest</Modal.Title>
+          <Button variant="close" aria-label="Close" onClick={handleClose} />
+        </Modal.Header>
+        <Modal.Body>
+          <GeneralInfoForm></GeneralInfoForm>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            I Got It
+          </Button>
+          <Button variant="link" className="text-gray ms-auto" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 };
 

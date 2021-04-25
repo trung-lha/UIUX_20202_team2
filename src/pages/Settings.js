@@ -70,10 +70,6 @@ export default () => {
         <Col xs={12} xl={12}>
           <GeneralInfoForm />
         </Col>
-
-        {/* <Col xs={12} xl={6}>
-          <GeneralInfoForm />
-        </Col> */}
       </Row>
     </>
   );

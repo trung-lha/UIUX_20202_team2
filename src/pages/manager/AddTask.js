@@ -1,68 +1,133 @@
 import React, { useState, useCallback } from 'react';
-import SelectDatepicker from 'react-select-datepicker';
-import { Form, Card } from "react-bootstrap";
-import { useForm } from "react-hook-form";
-import { getKey } from "../lib/util";
+import moment from "moment-timezone";
+import Datetime from "react-datetime";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
+import { Col, Row, Card, Form, Button, InputGroup, Dropdown, Modal } from '@themesberg/react-bootstrap';
 
-const AddTask = (props) => {
-
-  const onSubmit = () => {
-
-  };
-
+const AddTask = () => {
+  const [deadline, setDeadline] = useState("");
   return (
-    <Card className="panel panel-warning">
-      <Card.Header variant="primary" className="d-flex justify-content-between">
-        <span>Chi tiết công việc</span>
-        <span
-          className="fa fa-times-circle text-right"
-          type="button"
-          onClick={onCloseForm}></span>
-      </Card.Header>
-      <Card.Body className="panel-body">
-        <form>
-          <div className="form-group">
-            <label>Tên công việc</label>
-            <input
-              type="text"
-              name="name"
-              className="form-control"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Mô tả</label>
-            <input
-              type="text"
-              name="address"
-              className="form-control"
-            />
-          </div>
-          <div>
-            <label>Ngày bắt đầu</label>
-            <SelectDatepicker
-              value={value}
-              onDateChange={onDateChange}
-              minDate={new Date(1900, 0, 1)}
-              maxDate={new Date()}
-            />
-          </div>
-          <br />
-          <div className="text-center">
-            <button type="submit" className="btn btn-warning w-10">
-              Yes
-            </button>
-            &nbsp;
-            <button
-              type="reset"
-              className="btn btn-danger w-10"
-              onClick={onCloseForm}>
-              Cancel
-            </button>
-          </div>
-        </form>
-      </Card.Body>
-    </Card>
+    <>
+      <Card border="light" className="bg-white shadow-sm mb-4">
+        <Card.Body>
+
+          <Form>
+            <Row>
+              <Col xs={12} xl={6}>
+                <h5 className="mb-4">Thông tin công việc</h5>
+                <Row>
+                  <Col md={12} className="mb-3">
+                    <Form.Group id="nameWork">
+                      <Form.Label>Tên công việc</Form.Label>
+                      <Form.Control required type="text" placeholder="tên công việc" />
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={12} className="mb-3">
+                    <Form.Group id="describe">
+                      <Form.Label>Mô tả</Form.Label>
+                      <Form.Control required type="text" placeholder="mô tả công việc" />
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row className="align-items-center">
+                  <Col md={6} className="mb-3">
+                    <Form.Group id="deadline">
+                      <Form.Label>Ngày bắt đầu</Form.Label>
+                      <Datetime
+                        timeFormat={false}
+                        onChange={setDeadline}
+                        renderInput={(props, openCalendar) => (
+                          <InputGroup>
+                            <InputGroup.Text><FontAwesomeIcon icon={faCalendarAlt} /></InputGroup.Text>
+                            <Form.Control
+                              required
+                              type="text"
+                              value={deadline ? moment(deadline).format("MM/DD/YYYY") : ""}
+                              placeholder="mm/dd/yyyy"
+                              onFocus={openCalendar}
+                              onChange={() => { }} />
+                          </InputGroup>
+                        )} />
+                    </Form.Group>
+                  </Col>
+                  <Col md={6} className="mb-3">
+                    <Form.Group id="deadline">
+                      <Form.Label>Ngày kết thúc</Form.Label>
+                      <Datetime
+                        timeFormat={false}
+                        onChange={setDeadline}
+                        renderInput={(props, openCalendar) => (
+                          <InputGroup>
+                            <InputGroup.Text><FontAwesomeIcon icon={faCalendarAlt} /></InputGroup.Text>
+                            <Form.Control
+                              required
+                              type="text"
+                              value={deadline ? moment(deadline).format("MM/DD/YYYY") : ""}
+                              placeholder="mm/dd/yyyy"
+                              onFocus={openCalendar}
+                              onChange={() => { }} />
+                          </InputGroup>
+                        )} />
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={6} className="mb-3">
+                    <Form.Group id="gender">
+                      <Form.Label>Độ ưu tiên</Form.Label>
+                      <Form.Select defaultValue="0">
+                        <option value="0">Tiêu chuẩn</option>
+                        <option value="1">Cao</option>
+                        <option value="2">Thấp</option>
+                        <option value="2">Trung bình</option>
+                        <option value="2">Khẩn cấp</option>
+                      </Form.Select>
+                    </Form.Group>
+                  </Col>
+                </Row>
+              </Col>
+              <Col xs={12} xl={6}>
+                <h5 className="mb-4">Phân định trách nhiệm</h5>
+                <Row>
+                  <Col md={6} className="mb-3">
+                    <Form.Group id="firstName">
+                      <Form.Label>Người thực hiện</Form.Label>
+                      <Form.Control required type="text" placeholder="tên người thực hiện" />
+                    </Form.Group>
+                  </Col>
+                  <Col md={6} className="mb-3">
+                    <Form.Group id="lastName">
+                      <Form.Label>Người phê duyệt</Form.Label>
+                      <Form.Control required type="text" placeholder="tên nguời phê duyệt" />
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={6} className="mb-3">
+                    <Form.Group id="emal">
+                      <Form.Label>Email</Form.Label>
+                      <Form.Control required type="email" placeholder="name@company.com" />
+                    </Form.Group>
+                  </Col>
+                  <Col md={6} className="mb-3">
+                    <Form.Group id="phone">
+                      <Form.Label>Phone</Form.Label>
+                      <Form.Control required type="number" placeholder="+12-345 678 910" />
+                    </Form.Group>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+            <div className="mt-3">
+              <Button variant="primary" type="submit" style={{ float: 'right' }}>Save All</Button>
+            </div>
+          </Form>
+        </Card.Body>
+      </Card>
+    </>
   );
 };
 export default AddTask;
