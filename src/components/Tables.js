@@ -12,7 +12,7 @@ import {
   faExternalLinkAlt,
   faEye,
   faTrashAlt,
-  faUser
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   Col,
@@ -26,6 +26,7 @@ import {
   ProgressBar,
   Pagination,
   ButtonGroup,
+  Alert,
 } from "@themesberg/react-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -58,24 +59,18 @@ const ValueChange = ({ value, suffix }) => {
   );
 };
 
-export const PageVisitsTable = () => {
+export const PageVisitsTable = (props = {}) => {
+  const { title } = props;
   const TableRow = (props) => {
     const { pageName, views, returnValue, bounceRate } = props;
-    const bounceIcon = bounceRate < 0 ? faArrowDown : faArrowUp;
-    const bounceTxtColor = bounceRate < 0 ? "text-danger" : "text-success";
+    const bounceTxtColor = bounceRate === 0 ? "text-danger" : "text-success";
 
     return (
       <tr>
         <th scope="row">{pageName}</th>
         <td>{views}</td>
-        <td>${returnValue}</td>
-        <td>
-          <FontAwesomeIcon
-            icon={bounceIcon}
-            className={`${bounceTxtColor} me-3`}
-          />
-          {Math.abs(bounceRate)}%
-        </td>
+        <td>{returnValue}</td>
+        <td className={`${bounceTxtColor} me-3`}>{Math.abs(bounceRate)}%</td>
       </tr>
     );
   };
@@ -84,23 +79,21 @@ export const PageVisitsTable = () => {
     <Card border="light" className="shadow-sm">
       <Card.Header>
         <Row className="align-items-center">
-          <Col>
-            <h5>Page visits</h5>
+          <Col xs={6}>
+            <h5>{title}</h5>
           </Col>
-          <Col className="text-end">
-            <Button variant="secondary" size="sm">
-              See all
-            </Button>
+          <Col xs={6}>
+            <Alert variant="warning">Chưa đạt đủ chỉ tiêu</Alert>
           </Col>
         </Row>
       </Card.Header>
       <Table responsive className="align-items-center table-flush">
         <thead className="thead-light">
           <tr>
-            <th scope="col">Page name</th>
-            <th scope="col">Page Views</th>
-            <th scope="col">Page Value</th>
-            <th scope="col">Bounce rate</th>
+            <th scope="col">Sản Phẩm</th>
+            <th scope="col">Số lượng yêu cầu</th>
+            <th scope="col">Số lượng đã làm</th>
+            <th scope="col">Tiến độ</th>
           </tr>
         </thead>
         <tbody>
@@ -310,8 +303,7 @@ export const TransactionsTable = () => {
               as={Button}
               split
               variant="link"
-              className="text-dark m-0 p-0"
-            >
+              className="text-dark m-0 p-0">
               <span className="icon icon-sm">
                 <FontAwesomeIcon icon={faEllipsisH} className="icon-dark" />
               </span>
@@ -414,8 +406,7 @@ export const CommandsTable = () => {
         <Table
           responsive
           className="table-centered rounded"
-          style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}
-        >
+          style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>
           <thead className="thead-light">
             <tr>
               <th className="border-0" style={{ width: "5%" }}>
