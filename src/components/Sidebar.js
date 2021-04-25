@@ -103,8 +103,35 @@ export default (props = {}) => {
               <NavItem title="Transactions" icon={faHandHoldingUsd} link={Routes.Transactions.path} />
               <NavItem title="Settings" icon={faCog} link={Routes.Settings.path} />
 
-              <CollapsableNavItem eventKey="tables/" title="Tables" icon={faTable}>
-                <NavItem title="Bootstrap Table" link={Routes.BootstrapTables.path} />
+              <CollapsableNavItem eventKey="Employee/" title="Employee" icon={faTable}>
+                <CollapsableNavItem eventKey="viec 1" title="viec 1" icon={faTable}>
+                    <NavItem title="Day chuyen 1" link={Routes.BootstrapTables.path} />
+                    <NavItem title="Day chuyen 2" link={Routes.BootstrapTables.path} />
+                    <NavItem title="Day chuyen 3" link={Routes.BootstrapTables.path} />
+                    <NavItem title="Day chuyen 4" link={Routes.BootstrapTables.path} />
+                    <NavItem title="Day chuyen 5" link={Routes.BootstrapTables.path} />
+                </CollapsableNavItem>
+                <CollapsableNavItem eventKey="viec 2" title="viec 2" icon={faTable}>
+                    <NavItem title="Day chuyen 1" link={Routes.BootstrapTables.path} />
+                    <NavItem title="Day chuyen 2" link={Routes.BootstrapTables.path} />
+                    <NavItem title="Day chuyen 3" link={Routes.BootstrapTables.path} />
+                    <NavItem title="Day chuyen 4" link={Routes.BootstrapTables.path} />
+                    <NavItem title="Day chuyen 5" link={Routes.BootstrapTables.path} />
+                </CollapsableNavItem>
+                <CollapsableNavItem eventKey="viec 1" title="viec 3" icon={faTable}>
+                    <NavItem title="Day chuyen 1" link={Routes.BootstrapTables.path} />
+                    <NavItem title="Day chuyen 2" link={Routes.BootstrapTables.path} />
+                    <NavItem title="Day chuyen 3" link={Routes.BootstrapTables.path} />
+                    <NavItem title="Day chuyen 4" link={Routes.BootstrapTables.path} />
+                    <NavItem title="Day chuyen 5" link={Routes.BootstrapTables.path} />
+                </CollapsableNavItem>
+                <CollapsableNavItem eventKey="viec 1" title="viec 4" icon={faTable}>
+                    <NavItem title="Day chuyen 1" link={Routes.BootstrapTables.path} />
+                    <NavItem title="Day chuyen 2" link={Routes.BootstrapTables.path} />
+                    <NavItem title="Day chuyen 3" link={Routes.BootstrapTables.path} />
+                    <NavItem title="Day chuyen 4" link={Routes.BootstrapTables.path} />
+                    <NavItem title="Day chuyen 5" link={Routes.BootstrapTables.path} />
+                </CollapsableNavItem>
               </CollapsableNavItem>
 
               <CollapsableNavItem eventKey="examples/" title="Page Examples" icon={faFileAlt}>
