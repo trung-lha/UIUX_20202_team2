@@ -168,17 +168,11 @@ export default (props = {}) => {
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
               <NavItem
-                title="Volt React"
-                link={Routes.Presentation.path}
-                image={ReactHero}
-              />
-
-              <NavItem
-                title="Overview"
+                title="DashBoard"
                 link={Routes.DashboardOverview.path}
                 icon={faChartPie}
               />
-              <NavItem
+              {/* <NavItem
                 title="Transactions"
                 icon={faHandHoldingUsd}
                 link={Routes.Transactions.path}
@@ -187,35 +181,24 @@ export default (props = {}) => {
                 title="Settings"
                 icon={faCog}
                 link={Routes.Settings.path}
-              />
+              /> */}
 
               <CollapsableNavItem
                 eventKey="Employee/"
                 title="Employee"
                 icon={faTable}>
-                <NavItem
-                  title="Day chuyen 1"
-                  link={Routes.Employee.path}
-                />
-                <NavItem
-                  title="Day chuyen 2"
-                  link={Routes.Employee.path}
-                />
-                <NavItem
-                  title="Day chuyen 3"
-                  link={Routes.Employee.path}
-                />
-                <NavItem
-                  title="Day chuyen 4"
-                  link={Routes.Employee.path}
-                />
-                <NavItem
-                  title="Day chuyen 5"
-                  link={Routes.Employee.path}
-                />
+                <NavItem title="Day chuyen 1" link={Routes.Employee.path} />
+                <NavItem title="Day chuyen 2" link={Routes.Employee.path} />
+                <NavItem title="Day chuyen 3" link={Routes.Employee.path} />
+                <NavItem title="Day chuyen 4" link={Routes.Employee.path} />
+                <NavItem title="Day chuyen 5" link={Routes.Employee.path} />
               </CollapsableNavItem>
+              <NavItem
+                title="Danh sách công việc"
+                link={Routes.Transactions.path}
+              />
 
-              <CollapsableNavItem
+              {/* <CollapsableNavItem
                 eventKey="examples/"
                 title="Page Examples"
                 icon={faFileAlt}>
@@ -293,14 +276,14 @@ export default (props = {}) => {
                 <NavItem title="Tabs" link={Routes.Tabs.path} />
                 <NavItem title="Toasts" link={Routes.Toasts.path} />
                 <NavItem title="Tooltips" link={Routes.Tooltips.path} />
-              </CollapsableNavItem>
-              <NavItem
+              </CollapsableNavItem> */}
+              {/* <NavItem
                 external
                 title="Themesberg"
                 link="https://themesberg.com"
                 target="_blank"
                 image={ThemesbergLogo}
-              />
+              /> */}
             </Nav>
           </div>
         </SimpleBar>

@@ -6,6 +6,7 @@ import { UserInfo } from "../../components/Navbar";
 import Preloader from "../../components/Preloader";
 import DashboardOverview from "./components/congviec";
 import Kpi from "./components/kpi";
+import Transactions from "../Transactions";
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -77,7 +78,12 @@ export default () => {
         component={DashboardOverview}
       />
       <RouteWithSidebar exact path={Routes.Kpi.path} component={Kpi} />
-      <Redirect to={Routes.NotFound.path} />
+      <RouteWithSidebar
+        exact
+        path={Routes.Transactions.path}
+        component={Transactions}
+      />
+      {/* <Redirect to={Routes.NotFound.path} /> */}
     </Switch>
   );
 };

@@ -2,14 +2,14 @@ export const Routes = {
   // pages
   Presentation: { path: "/" },
   DashboardOverview: { path: "/dashboard/overview" },
-  Transactions: { path: "/transactions" },
+  Transactions: { path: "/danh-sach-cv-manager" },
   Settings: { path: "/settings" },
   Upgrade: { path: "/upgrade" },
   BootstrapTables: { path: "/tables/bootstrap-tables" },
   Billing: { path: "/examples/billing" },
   Invoice: { path: "/examples/invoice" },
-  Signin: { path: "/examples/sign-up" },
-  Signup: { path: "/examples/sign-in" },
+  Signin: { path: "/examples/sign-in" },
+  Signup: { path: "/examples/sign-up" },
   ForgotPassword: { path: "/examples/forgot-password" },
   ResetPassword: { path: "/examples/reset-password" },
   Lock: { path: "/examples/lock" },
@@ -18,8 +18,8 @@ export const Routes = {
 
   CongViec: { path: "/congnhan" },
   Kpi: { path: "/congnhan/kpi" },
-  Employee: {path: "/employee_manage"},
-  
+  Employee: { path: "/employee_manage" },
+
   // docs
   DocsOverview: { path: "/documentation/overview" },
   DocsDownload: { path: "/documentation/download" },
@@ -48,6 +48,4 @@ export const Routes = {
   Tooltips: { path: "/components/tooltips" },
   Toasts: { path: "/components/toasts" },
   WidgetsComponent: { path: "/components/widgets" },
-
-
 };

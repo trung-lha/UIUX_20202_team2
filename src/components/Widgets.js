@@ -26,6 +26,8 @@ import {
   Button,
   ListGroup,
   ProgressBar,
+  InputGroup,
+  Form,
 } from "@themesberg/react-bootstrap";
 import {
   CircleChart,
@@ -38,6 +40,103 @@ import Profile1 from "../assets/img/team/profile-picture-1.jpg";
 import ProfileCover from "../assets/img/profile-cover.jpg";
 
 import teamMembers from "../data/teamMembers";
+import moment from "moment-timezone";
+import Datetime from "react-datetime";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+
+export const CardInfor = () => {
+  const [birthday, setBirthday] = React.useState("");
+
+  return (
+    <Form>
+      <Row>
+        <Col md={6} className="mb-3">
+          <Form.Group id="firstName">
+            <Form.Label>Tên Công Nhân</Form.Label>
+            <Form.Control required type="text" placeholder="tên công nhân" />
+          </Form.Group>
+        </Col>
+        <Col md={6} className="mb-3">
+          <Form.Group id="lastName">
+            <Form.Label>Số CCCD</Form.Label>
+            <Form.Control required type="text" placeholder="số CCCD" />
+          </Form.Group>
+        </Col>
+      </Row>
+      <Row className="align-items-center">
+        <Col md={6} className="mb-3">
+          <Form.Group id="birthday">
+            <Form.Label>Birthday</Form.Label>
+            <Datetime
+              timeFormat={false}
+              onChange={setBirthday}
+              renderInput={(props, openCalendar) => (
+                <InputGroup>
+                  <InputGroup.Text>
+                    <FontAwesomeIcon icon={faCalendarAlt} />
+                  </InputGroup.Text>
+                  <Form.Control
+                    required
+                    type="text"
+                    value={
+                      birthday ? moment(birthday).format("MM/DD/YYYY") : ""
+                    }
+                    placeholder="mm/dd/yyyy"
+                    onFocus={openCalendar}
+                    onChange={() => {}}
+                  />
+                </InputGroup>
+              )}
+            />
+          </Form.Group>
+        </Col>
+        <Col md={6} className="mb-3">
+          <Form.Group id="gender">
+            <Form.Label>Gender</Form.Label>
+            <Form.Select defaultValue="0">
+              <option value="0">Gender</option>
+              <option value="1">Female</option>
+              <option value="2">Male</option>
+            </Form.Select>
+          </Form.Group>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={6} className="mb-3">
+          <Form.Group id="emal">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              required
+              type="email"
+              placeholder="name@company.com"
+            />
+          </Form.Group>
+        </Col>
+        <Col md={6} className="mb-3">
+          <Form.Group id="phone">
+            <Form.Label>Số điện thoại</Form.Label>
+            <Form.Control required type="text" placeholder="+12-345 678 910" />
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <h5 className="my-4">Địa chỉ</h5>
+      <Row>
+        <Col sm={12} className="mb-3">
+          <Form.Group id="address">
+            <Form.Control required type="text" placeholder="địa chỉ" />
+          </Form.Group>
+        </Col>
+        {/* <Col sm={3} className="mb-3">
+              <Form.Group id="addressNumber">
+                <Form.Label>Number</Form.Label>
+                <Form.Control required type="number" placeholder="No." />
+              </Form.Group>
+            </Col> */}
+      </Row>
+    </Form>
+  );
+};
 
 export const ProfileCardWidget = () => {
   return (
@@ -52,18 +151,11 @@ export const ProfileCardWidget = () => {
           alt="Neil Portrait"
           className="user-avatar large-avatar rounded-circle mx-auto mt-n7 mb-4"
         />
-        <Card.Title>Neil Sims</Card.Title>
+        <Card.Title>Nguyễn Văn Dũng</Card.Title>
         <Card.Subtitle className="fw-normal">
           Senior Software Engineer
         </Card.Subtitle>
-        <Card.Text className="text-gray mb-4">New York, USA</Card.Text>
-
-        <Button variant="primary" size="sm" className="me-2">
-          <FontAwesomeIcon icon={faUserPlus} className="me-1" /> Connect
-        </Button>
-        <Button variant="secondary" size="sm">
-          Send Message
-        </Button>
+        <Card.Text className="text-gray mb-4">, USA</Card.Text>
       </Card.Body>
     </Card>
   );

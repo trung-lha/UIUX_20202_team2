@@ -16,8 +16,7 @@ import {
   InputGroup,
   Dropdown,
 } from "@themesberg/react-bootstrap";
-import { TransactionsTable } from "../../../../components/Tables";
-
+import { UserList } from "./UserList";
 
 export default () => {
   return (
@@ -30,11 +29,10 @@ export default () => {
             <Breadcrumb.Item>
               <FontAwesomeIcon icon={faHome} />
             </Breadcrumb.Item>
-            <Breadcrumb.Item>Volt</Breadcrumb.Item>
-            <Breadcrumb.Item active>Transactions</Breadcrumb.Item>
+            <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+            <Breadcrumb.Item active>Danh sách công nhân</Breadcrumb.Item>
           </Breadcrumb>
-          <h4>Transactions</h4>
-          <p className="mb-0">Your web analytics dashboard template.</p>
+          <h4>Danh Sách Công Nhân</h4>
         </div>
         <div className="btn-toolbar mb-2 mb-md-0">
           <ButtonGroup>
@@ -86,7 +84,7 @@ export default () => {
           </Col>
         </Row>
       </div>
-      <TransactionsTable />
+      <UserList />
     </>
   );
 };
