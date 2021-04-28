@@ -31,19 +31,10 @@ import {
 } from "@themesberg/react-bootstrap";
 import { Link } from "react-router-dom";
 
-import { Routes } from "../routes";
-import { pageVisits, pageTraffic, pageRanking } from "../data/tables";
-import transactions from "../data/transactions";
-import commands from "../data/commands";
-import {
-  CircleChartWidget,
-  CounterWidget,
-  SalesValueWidget,
-  SalesValueWidgetPhone,
-} from "./Widgets";
-import { trafficShares } from "../data/charts";
-import AddTask from "../pages/manager/AddTask";
-import { GeneralInfoForm } from "../components/Forms";
+import { Routes } from "../../../../routes";
+import { pageVisits, pageTraffic, pageRanking } from "../../../../data/tables";
+import { UserListData } from "../../../../data/transactions";
+import FormUser from "./FormUser";
 
 const ValueChange = ({ value, suffix }) => {
   const valueIcon = value < 0 ? faAngleDown : faAngleUp;
@@ -257,28 +248,21 @@ export const RankingTable = () => {
   );
 };
 
-export const TransactionsTable = () => {
+export const UserList = () => {
   const [showDefault, setShowDefault] = useState(false);
   const handleClose = () => setShowDefault(false);
-  const totalTransactions = transactions.length;
+  const totalTransactions = UserListData.length;
 
   const showModel = () => {
     setShowDefault(true);
-  }
+  };
 
   const TableRow = (props) => {
-    const { invoiceNumber, subscription, price, issueDate, dueDate, status } = props;
-    const statusVariant = status === "Đã hoàn thành" ? "success"
-      : status === "Đang thực hiện" ? "warning"
-        : status === "Quá hạn" ? "danger" : "primary";
-
-
+    const { invoiceNumber, subscription, congviec } = props;
     return (
       <tr>
         <td>
-          <span className="fw-normal">
-            {invoiceNumber}
-          </span>
+          <span className="fw-normal">{invoiceNumber}</span>
           {/* <Card.Link as={Link} to={Routes.Invoice.path} className="fw-normal">
             {invoiceNumber}
           </Card.Link> */}
@@ -287,18 +271,7 @@ export const TransactionsTable = () => {
           <span className="fw-normal">{subscription}</span>
         </td>
         <td>
-          <span className="fw-normal">{issueDate}</span>
-        </td>
-        <td>
-          <span className="fw-normal">{dueDate}</span>
-        </td>
-        <td>
-          <span className="fw-normal">
-            {parseFloat(price)}%
-          </span>
-        </td>
-        <td>
-          <span className={`fw-normal text-${statusVariant}`}>{status}</span>
+          <span className="fw-normal">{congviec}</span>
         </td>
         <td>
           <Dropdown as={ButtonGroup}>
@@ -313,7 +286,8 @@ export const TransactionsTable = () => {
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item onClick={showModel}>
-                <FontAwesomeIcon icon={faEye} className="me-2" />Chi tiết
+                <FontAwesomeIcon icon={faEye} className="me-2" />
+                Chi tiết
               </Dropdown.Item>
               <Dropdown.Item className="text-danger">
                 <FontAwesomeIcon icon={faTrashAlt} className="me-2" /> Xóa
@@ -324,35 +298,25 @@ export const TransactionsTable = () => {
       </tr>
     );
   };
-  const ShowDetail = () => {
-    return (
-      <div id="myModel" className="modalFood">
-        <div className="content-modal-box">
-          <AddTask></AddTask>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <>
       <div>
-        <Card border="light" className="table-wrapper table-responsive shadow-sm">
+        <Card
+          border="light"
+          className="table-wrapper table-responsive shadow-sm">
           <Card.Body className="pt-0">
             <Table hover className="user-table align-items-center">
               <thead>
                 <tr>
-                  <th className="border-bottom">#</th>
-                  <th className="border-bottom">Tên công việc</th>
-                  <th className="border-bottom">Ngày bắt đầu</th>
-                  <th className="border-bottom">Ngày kết thúc</th>
-                  <th className="border-bottom">Tiến độ</th>
-                  <th className="border-bottom">Trạng thái</th>
+                  <th className="border-bottom">#ID</th>
+                  <th className="border-bottom">Tên công nhân</th>
+                  <th className="border-bottom">Công việc đang thực hiện</th>
                   <th className="border-bottom">Hành động</th>
                 </tr>
               </thead>
               <tbody>
-                {transactions.map((t) => (
+                {UserListData.map((t) => (
                   <TableRow key={`transaction-${t.invoiceNumber}`} {...t} />
                 ))}
               </tbody>
@@ -360,173 +324,45 @@ export const TransactionsTable = () => {
             <Card.Footer className="px-3 border-0 d-lg-flex align-items-center justify-content-between">
               <Nav>
                 <Pagination className="mb-2 mb-lg-0">
-
-                  <Pagination.Prev>
-                    Trước
-              </Pagination.Prev>
+                  <Pagination.Prev>Trước</Pagination.Prev>
 
                   <Pagination.Item active>1</Pagination.Item>
                   <Pagination.Item>2</Pagination.Item>
                   <Pagination.Item>3</Pagination.Item>
                   <Pagination.Item>4</Pagination.Item>
                   <Pagination.Item>5</Pagination.Item>
-                  <Pagination.Next>
-                    Tiếp
-              </Pagination.Next>
-
+                  <Pagination.Next>Tiếp</Pagination.Next>
                 </Pagination>
               </Nav>
               <small className="fw-bold">
-                Hiển thị <b>{totalTransactions}</b> trong số <b>25</b> công việc
-          </small>
+                Hiển thị <b>{totalTransactions}</b> trong số <b>25</b> công nhân
+              </small>
             </Card.Footer>
           </Card.Body>
         </Card>
-
       </div>
-      <Modal as={Modal.Dialog} centered show={showDefault} onHide={handleClose} size="xl">
+      <Modal
+        as={Modal.Dialog}
+        centered
+        show={showDefault}
+        onHide={handleClose}
+        size="xl">
         <Modal.Header>
-          <Modal.Title className="h6">Chi tieest</Modal.Title>
+          <Modal.Title className="h6">Chi tiết công nhân</Modal.Title>
           <Button variant="close" aria-label="Close" onClick={handleClose} />
         </Modal.Header>
         <Modal.Body>
-          <GeneralInfoForm></GeneralInfoForm>
+          <FormUser />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            I Got It
-          </Button>
-          <Button variant="link" className="text-gray ms-auto" onClick={handleClose}>
+          <Button
+            variant="link"
+            className="text-gray ms-auto"
+            onClick={handleClose}>
             Close
           </Button>
         </Modal.Footer>
       </Modal>
     </>
-  );
-};
-
-export const CommandsTable = () => {
-  const TableRow = (props) => {
-    const { name, usage = [], description, link } = props;
-
-    return (
-      <tr>
-        <td className="border-0" style={{ width: "5%" }}>
-          <code>{name}</code>
-        </td>
-        <td className="fw-bold border-0" style={{ width: "5%" }}>
-          <ul className="ps-0">
-            {usage.map((u) => (
-              <ol key={u} className="ps-0">
-                <code>{u}</code>
-              </ol>
-            ))}
-          </ul>
-        </td>
-        <td className="border-0" style={{ width: "50%" }}>
-          <pre className="m-0 p-0">{description}</pre>
-        </td>
-        <td className="border-0" style={{ width: "40%" }}>
-          <pre>
-            <Card.Link href={link} target="_blank">
-              Read More{" "}
-              <FontAwesomeIcon icon={faExternalLinkAlt} className="ms-1" />
-            </Card.Link>
-          </pre>
-        </td>
-      </tr>
-    );
-  };
-
-  return (
-    <Card border="light" className="shadow-sm">
-      <Card.Body className="p-0">
-        <Table
-          responsive
-          className="table-centered rounded"
-          style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>
-          <thead className="thead-light">
-            <tr>
-              <th className="border-0" style={{ width: "5%" }}>
-                Name
-              </th>
-              <th className="border-0" style={{ width: "5%" }}>
-                Usage
-              </th>
-              <th className="border-0" style={{ width: "50%" }}>
-                Description
-              </th>
-              <th className="border-0" style={{ width: "40%" }}>
-                Extra
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {commands.map((c) => (
-              <TableRow key={`command-${c.id}`} {...c} />
-            ))}
-          </tbody>
-        </Table>
-      </Card.Body>
-    </Card>
-  );
-};
-
-export const InforGroup = ({ data }) => {
-  return (
-    <Row className="justify-content-md-center">
-      <Col xs={12} className="mb-4 d-none d-sm-block">
-        <SalesValueWidget
-          title="Sales Value"
-          value="10,567"
-          percentage={10.57}
-        />
-      </Col>
-      <Col xs={12} className="mb-4 d-sm-none">
-        <SalesValueWidgetPhone
-          title="Sales Value"
-          value="10,567"
-          percentage={10.57}
-        />
-      </Col>
-      <Col xs={12} sm={6} xl={3} className="mb-4">
-        <CounterWidget
-          category="Customers online"
-          title="200"
-          period="Feb 1 - Apr 1"
-          percentage={99}
-          icon={faUser}
-          iconColor="shape-secondary"
-        />
-      </Col>
-      <Col xs={12} sm={6} xl={3} className="mb-4">
-        <CounterWidget
-          category="Customers"
-          title="345k"
-          period="Feb 1 - Apr 1"
-          icon={faUser}
-          iconColor="shape-secondary"
-        />
-      </Col>
-      <Col xs={12} sm={6} xl={3} className="mb-4">
-        <CounterWidget
-          category="Revenue"
-          title="$43,594"
-          period="Feb 1 - Apr 1"
-          percentage={28.4}
-          icon={faCashRegister}
-          iconColor="shape-tertiary"
-        />
-      </Col>
-      <Col xs={12} sm={6} xl={3} className="mb-4">
-        <CounterWidget
-          category="Customers"
-          title="345k"
-          period="Feb 1 - Apr 1"
-          icon={faUser}
-          iconColor="shape-secondary"
-        />
-      </Col>
-    </Row>
   );
 };
